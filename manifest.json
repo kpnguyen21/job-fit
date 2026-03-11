@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Universal Job-Fit + AI Resume Tailor",
+  "version": "1.0.0",
+  "description": "Analyze job postings and instantly tailor your resume and cover letter.",
+  "permissions": ["storage", "scripting", "activeTab"],
+  "host_permissions": ["https://*/*", "http://*/*"],
+  "background": {
+    "service_worker": "src/background/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["src/content/contentScript.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/ui/sidebar.html",
+        "src/ui/sidebar.js",
+        "src/ui/sidebar.css",
+        "assets/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "action": {
+    "default_title": "Universal Job-Fit + AI Resume Tailor"
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  }
+}
