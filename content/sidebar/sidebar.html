@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Job-Fit + Micro Tailor</title>
+  <link rel="stylesheet" href="sidebar.css" />
+</head>
+<body>
+  <div id="root">
+    <header>
+      <div class="title">JOB-FIT ANALYZER</div>
+      <div class="subtitle">Data / Quant · VS Code Style</div>
+    </header>
+
+    <section id="status">
+      <div class="status-line">Waiting for analysis...</div>
+    </section>
+
+    <section id="match-section" class="panel hidden">
+      <div class="panel-header">MATCH SCORE</div>
+      <div id="match-score" class="match-score">--%</div>
+      <div class="panel-subheader">STRENGTHS</div>
+      <ul id="strengths"></ul>
+      <div class="panel-subheader">MISSING SKILLS</div>
+      <ul id="missing-skills"></ul>
+    </section>
+
+    <section id="insights-section" class="panel hidden">
+      <div class="panel-header">RECRUITER INSIGHTS</div>
+      <ul id="insights"></ul>
+    </section>
+
+    <section id="bullets-section" class="panel">
+      <div class="panel-header">MICRO-TAILOR BULLETS</div>
+      <textarea id="bullet-input" placeholder="Paste a single resume bullet here..."></textarea>
+      <div class="button-row">
+        <button data-mode="rewrite">Rewrite</button>
+        <button data-mode="metrics">Add Metrics</button>
+        <button data-mode="tone">Improve Tone</button>
+      </div>
+      <div id="bullet-output" class="bullet-output"></div>
+    </section>
+
+    <section id="summary-section" class="panel">
+      <div class="panel-header">SUMMARY (2–3 SENTENCES)</div>
+      <button id="generate-summary-btn">Generate Summary</button>
+      <div id="summary-output" class="summary-output"></div>
+    </section>
+  </div>
+
+  <script src="sidebar.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-family: Consolas, "Fira Code", "JetBrains Mono", monospace;
+  font-size: 13px;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  background: #1e1e1e;
+}
+
+header {
+  border-bottom: 1px solid #3c3c3c;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: #9cdcfe;
+}
+
+.subtitle {
+  font-size: 11px;
+  color: #808080;
+}
+
+.panel {
+  background: #252526;
+  border: 1px solid #3c3c3c;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.panel-header {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #9cdcfe;
+  margin-bottom: 4px;
+}
+
+.panel-subheader {
+  font-size: 11px;
+  color: #c586c0;
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+
+.match-score {
+  font-size: 24px;
+  color: #4ec9b0;
+  margin-bottom: 4px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 2px 0 4px 0;
+}
+
+ul li::before {
+  content: "• ";
+  color: #ce9178;
+}
+
+.status-line {
+  font-size: 11px;
+  color: #808080;
+}
+
+textarea {
+  width: 100%;
+  min-height: 60px;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border: 1px solid #3c3c3c;
+  padding: 4px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.button-row {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+button {
+  flex: 1;
+  background: #007acc;
+  border: 1px solid #3c3c3c;
+  color: #d4d4d4;
+  font-family: inherit;
+  font-size: 11px;
+  padding: 4px 6px;
+  cursor: pointer;
+}
+
+button[data-mode="metrics"] {
+  background: #4ec9b0;
+}
+
+button[data-mode="tone"] {
+  background: #c586c0;
+}
+
+button:hover {
+  filter: brightness(1.1);
+}
+
+.bullet-output,
+.summary-output {
+  margin-top: 4px;
+  padding: 4px;
+  background: #1e1e1e;
+  border: 1px solid #3c3c3c;
+  min-height: 40px;
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+
+.hidden {
+  display: none;
+}
