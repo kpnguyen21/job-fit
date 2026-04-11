@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobMatch AI</title>
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">JobMatch AI</span>
+      </div>
+      <span class="badge-free">Free</span>
+    </header>
+
+    <nav class="tab-nav">
+      <button class="tab-btn active" data-tab="match">Match</button>
+      <button class="tab-btn" data-tab="resume">ATS Writer</button>
+      <button class="tab-btn" data-tab="history">History</button>
+    </nav>
+
+    <!-- MATCH TAB -->
+    <div id="tab-match" class="tab-content active">
+      <section class="card">
+        <div class="section-header">
+          <span class="section-title">Your Resume</span>
+          <button id="clear-resume-btn" class="text-btn">Clear</button>
+        </div>
+        <textarea id="resume-input" placeholder="Paste your resume text here…" rows="6"></textarea>
+        <div class="btn-row">
+          <label class="btn-secondary file-label">
+            Upload TXT
+            <input type="file" id="resume-file" accept=".txt" style="display:none"/>
+          </label>
+          <button id="save-resume-btn" class="btn-primary">Save Resume</button>
+        </div>
+        <div id="resume-status" class="status-bar hidden"></div>
+      </section>
+
+      <section class="card">
+        <div class="section-header">
+          <span class="section-title">Job Description</span>
+          <button id="scrape-jd-btn" class="btn-accent">← Scrape Page</button>
+        </div>
+        <textarea id="jd-input" placeholder="Paste job description, or click 'Scrape Page' to auto-extract…" rows="6"></textarea>
+      </section>
+
+      <button id="analyze-btn" class="btn-cta">Analyze Match</button>
+
+      <div id="match-results" class="hidden">
+        <div class="score-card">
+          <div class="score-ring-wrap">
+            <svg id="score-ring" viewBox="0 0 100 100" width="90" height="90">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="10"/>
+              <circle id="score-arc" cx="50" cy="50" r="40" fill="none" stroke="#6ee7b7" stroke-width="10"
+                stroke-dasharray="251.2" stroke-dashoffset="251.2"
+                stroke-linecap="round" transform="rotate(-90 50 50)"/>
+            </svg>
+            <span id="score-num" class="score-num">0%</span>
+          </div>
+          <div class="score-labels">
+            <p id="score-label" class="score-title">Match Score</p>
+            <p id="score-desc" class="score-sub"></p>
+          </div>
+        </div>
+
+        <div class="skills-section">
+          <div class="skills-group">
+            <p class="skills-label matched">✓ Matched Skills</p>
+            <div id="matched-skills" class="pills"></div>
+          </div>
+          <div class="skills-group">
+            <p class="skills-label missing">✗ Missing Skills</p>
+            <div id="missing-skills" class="pills"></div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button id="highlight-btn" class="btn-secondary full-width">Highlight keywords on page</button>
+        </div>
+
+        <div class="card inset">
+          <p class="section-title">Analysis</p>
+          <p id="analysis-text"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATS WRITER TAB -->
+    <div id="tab-resume" class="tab-content hidden">
+      <div class="card">
+        <p class="section-title">Generate ATS-Optimized Section</p>
+        <p class="hint">Uses your saved resume + current JD to write ATS-friendly content.</p>
+        <label>Section to generate</label>
+        <select id="section-select">
+          <option value="summary">Professional Summary</option>
+          <option value="bullets">Work Experience Bullets</option>
+          <option value="skills">Skills Section</option>
+          <option value="cover">Cover Letter Opening</option>
+        </select>
+        <label style="margin-top:10px">Tone</label>
+        <select id="tone-select">
+          <option value="professional">Professional</option>
+          <option value="concise">Concise / Direct</option>
+          <option value="executive">Executive / Senior</option>
+          <option value="startup">Startup / Growth</option>
+        </select>
+        <button id="generate-btn" class="btn-cta" style="margin-top:12px">Generate</button>
+      </div>
+
+      <div id="ats-result" class="hidden">
+        <div class="card inset">
+          <div class="section-header">
+            <p class="section-title" id="ats-section-title">Generated Section</p>
+            <button id="copy-btn" class="text-btn">Copy</button>
+          </div>
+          <div id="ats-output" class="ats-output"></div>
+        </div>
+        <div class="card inset">
+          <p class="section-title">ATS Tips</p>
+          <div id="ats-tips"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORY TAB -->
+    <div id="tab-history" class="tab-content hidden">
+      <div class="card">
+        <div class="section-header">
+          <span class="section-title">Past Analyses</span>
+          <button id="clear-history-btn" class="text-btn">Clear all</button>
+        </div>
+        <div id="history-list"></div>
+      </div>
+    </div>
+
+    <div id="loading-overlay" class="hidden">
+      <div class="spinner"></div>
+      <p id="loading-text">Analyzing…</p>
+    </div>
+  </div>
+  <script src="sidepanel.js"></script>
+</body>
+</html>
