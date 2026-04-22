@@ -1,7 +1,9 @@
 // ─── Config ───────────────────────────────────────────────────────────────────
 // After deploying your backend to Render, replace this URL with your live URL.
 // Example: "https://jobmatch-ai-backend.onrender.com"
-const BACKEND_URL = "https://jobmatch-ai-backend.onrender.com";
+// const BACKEND_URL = "https://jobmatch-ai-backend.onrender.com";
+const BACKEND_URL = "https://jobmatch-ai.jobmatch-ai.workers.dev";
+
 
 chrome.action.onClicked.addListener((tab) => {
   chrome.sidePanel.open({ tabId: tab.id });
