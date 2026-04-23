@@ -7,3 +7,11 @@ Searching for jobs that truly match your skills has become increasingly time-con
 Platforms like LinkedIn provide a `Show Match Details` feature that compares a candidate's skills with the skills listed in a job description. This helps job seekers quickly understand how well their background aligns with a role. However, this capability is largely limited to LinkedIn and is not available on many other popular job boards such as Indeed.
 
 This project aims to solve that problem by developing a Chrome extension that brings similar skill-matching functionality to multiple job search platforms.
+
+# How to use the add-on
+- Download/clone the repo
+- Open `chrome://extensions`
+- Enable **Developer mode**
+- Click **Load unpacked** -> Select the `job-match-extension-hosted` folder
+- Navigate to a job posting on Indeed or LinkedIn
+- Click the extension icon and start using it.
