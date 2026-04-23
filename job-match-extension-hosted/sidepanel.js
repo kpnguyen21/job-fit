@@ -12,12 +12,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 async function loadStorage() {
-  const data = await chrome.storage.local.get(["resume", "history"]);
+  const data = await chrome.storage.local.get(["resume", "history", "lastJD"]);
   savedResume = data.resume || "";
+  currentJD = data.lastJD || "";
   if (savedResume) {
     $("resume-input").value = savedResume;
     showStatus("resume-status", "Resume saved ✓");
   }
+  if (currentJD) $("jd-input").value = currentJD;
 }
 
 // ─── Bindings ─────────────────────────────────────────────────────────────────
@@ -107,6 +109,7 @@ async function analyzeMatch() {
   matchResults = result.data;
   renderMatchResults(result.data);
   await saveToHistory(result.data, jd);
+  await chrome.storage.local.set({ lastJD: jd });
 }
 
 function renderMatchResults(data) {
@@ -150,15 +153,20 @@ async function toggleHighlight() {
   highlightActive = !highlightActive;
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab) return;
-  if (highlightActive) {
-    await chrome.tabs.sendMessage(tab.id, {
-      type: "HIGHLIGHT_KEYWORDS",
-      keywords: matchResults.allJDKeywords || [],
-      matched: matchResults.matchedSkills || [],
-    });
-    $("highlight-btn").textContent = "Remove highlights";
-  } else {
-    await chrome.tabs.sendMessage(tab.id, { type: "CLEAR_HIGHLIGHTS" });
+  try {
+    if (highlightActive) {
+      await chrome.tabs.sendMessage(tab.id, {
+        type: "HIGHLIGHT_KEYWORDS",
+        keywords: matchResults.allJDKeywords || [],
+        matched: matchResults.matchedSkills || [],
+      });
+      $("highlight-btn").textContent = "Remove highlights";
+    } else {
+      await chrome.tabs.sendMessage(tab.id, { type: "CLEAR_HIGHLIGHTS" });
+      $("highlight-btn").textContent = "Highlight keywords on page";
+    }
+  } catch (e) {
+    highlightActive = false;
     $("highlight-btn").textContent = "Highlight keywords on page";
   }
 }

@@ -122,8 +122,8 @@ export default {
       if (!resume || !jd) {
         return json({ error: "resume and jd are required" }, 400, headers);
       }
-      if (resume.length > 6000 || jd.length > 6000) {
-        return json({ error: "Text too long (max 6000 chars each)" }, 400, headers);
+      if (resume.length > 10000 || jd.length > 10000) {
+        return json({ error: "Text too long (max 10000 chars each)" }, 400, headers);
       }
 
       try {
@@ -143,7 +143,8 @@ Return ONLY valid JSON with this exact shape:
         return json(parsed, 200, headers);
       } catch (err) {
         console.error("Analyze error:", err.message);
-        return json({ error: "Analysis failed. Please try again." }, 500, headers);
+        // return json({ error: "Analysis failed. Please try again." }, 500, headers);
+        return json({ error: err.message }, 500, headers);
       }
     }
 
@@ -151,7 +152,8 @@ Return ONLY valid JSON with this exact shape:
     if (url.pathname === "/api/generate") {
       const { resume, jd, section, tone } = body;
       if (!resume || !jd || !section) {
-        return json({ error: "resume, jd, and section are required" }, 400, headers);
+        // return json({ error: "resume, jd, and section are required" }, 400, headers);
+        return json({ error: err.message }, 500, headers);
       }
 
       const sectionNames = {
