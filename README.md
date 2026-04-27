@@ -26,12 +26,13 @@ This project aims to solve that problem by developing a Chrome extension that br
 
 <h3 id="UI">User Interface</h3>
 
-<p float="center">
+<!-- 
+ <p float="center">
   <img src="/Figures/Money_Laundering_Cycle.png" width="900" />
 </p>
 <p align="center"><b>Figure 1. Three stages of Money Laundering Cycle.
 </b></p>
-
+-->
 ---
 
 <h3 id="Setup">Installation & Setup</h3>
