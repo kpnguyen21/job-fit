@@ -49,6 +49,18 @@ I use Groq's free tier for the AI layer. It allows up to 14,400 requests per day
 
 <h3 id="Prerequisites">Prerequisites</h3>
 
+#### Option A: use the hosted backend (no accounts needed)
+This is the simplest way to get started. Everything runs through the pre‑configured Cloudflare Worker, so you don't need to create any accounts, manage API keys, or deploy anything yourself. Just load the Chrome extension and start using it.
+- Chrome v114+
+
+#### Option B: self-host your own backend
+Choose this option if you want full control over the backend, want to customize rate limits, or prefer to use your own Groq API key. You'll deploy your own Cloudflare Worker and connect it to Groq's API.
+- Chrome v114+
+- Free Groq account → [console.groq.com](https://console.groq.com)
+- Node.js — install via [nvm](https://github.com/nvm-sh/nvm) or [Volta](https://volta.sh/);
+  see [Wrangler's system requirements](https://developers.cloudflare.com/workers/wrangler/install-and-update/) for the minimum supported version
+- Free Cloudflare account → [cloudflare.com](https://www.cloudflare.com)
+
 ---
 
 <h3 id="UI">User Interface</h3>
