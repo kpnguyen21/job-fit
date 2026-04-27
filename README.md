@@ -6,6 +6,7 @@ Develop a Chrome extension that matches skills with job descriptions and automat
 
 <ul>
     <li><a href="#Introduction">Introduction</a></li>
+    <li><a href="#Architecture">Architecture Overview</a></li>
     <li><a href="#UI">User Interface</a></li>
     <li><a href="#Setup">Installation & Setup</a></li>
     <li><a href="#Supported-Sites">Supported Sites</a></li>
@@ -24,24 +25,45 @@ This project aims to solve that problem by developing a Chrome extension that br
 
 ---
 
+<h3 id="Architecture">Architecture Overview</h3>
+
+The architecture is organized into four layers (see Figure 1):
+- User layer: The job boards where the user is browsing. These are the entry points into the system.
+- Extension layer: Three JavaScript modules work together inside the Chrome extension.
+    - `content.js` runs directly on the job posting page and extracts the job description.
+    - `sidepanel.js` provides the user interface, allowing the user to paste their resume and view the analysis results.
+    - `background.js` acts as the communication hub, receiving messages from the side panel and forwarding requests to the backend.
+- Backend layer: A Cloudflare Worker (`worker.js`) handles all network‑side responsibilities. It manages CORS, validates request origins, and enforces rate limits using a KV store (30 requests per hour per IP). The Worker also proxies requests to Groq so the API key remains securely on the server.
+- AI layer: Groq's Llama 3.3 70B model performs the core analysis. It processes the job description and resume to generate the match score, identify matched and missing skills, and produce ATS‑optimized resume sections.
+
+<p align="center">
+  <img src="/figures/architecture.jpg" width="900" />
+</p>
+<p align="center"><b>Figure 1. Architecture Overview. Job boards provide the source text, which is scraped and processed by the Chrome extension (content.js, sidepanel.js, background.js). Requests are routed through a Cloudflare Worker backend, which forwards them to the AI layer using Groq’s Llama 3.3 70B model to generate match scores.
+</b></p>
+
+I use Groq's free tier for the AI layer. It allows up to 14,400 requests per day at no cost, which is more than enough for development, testing, and typical user traffic. This makes the system inexpensive to run while still providing fast inference through Groq's Llama 3.3 70B model.
+
+---
+
 <h3 id="UI">User Interface</h3>
 
-<p float="center">
+<p align="center">
   <img src="/figures/match.jpg" width="900" />
 </p>
-<p align="center"><b>Figure 1. Match.
+<p align="center"><b>Figure 2. Match.
 </b></p>
 
-<p float="center">
+<p align="center">
   <img src="/figures/ATS_all.jpg" width="900" />
 </p>
-<p align="center"><b>Figure 2. ATS.
+<p align="center"><b>Figure 3. ATS.
 </b></p>
 
-<p float="center">
+<p align="center">
   <img src="/figures/history.jpg" width="900" />
 </p>
-<p align="center"><b>Figure 3. History.
+<p align="center"><b>Figure 4. History.
 </b></p>
 
 ---
