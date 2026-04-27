@@ -7,6 +7,7 @@ Develop a Chrome extension that matches skills with job descriptions and automat
 <ul>
     <li><a href="#Introduction">Introduction</a></li>
     <li><a href="#Architecture">Architecture Overview</a></li>
+    <li><a href="#Prerequisites">Prerequisites</a></li>
     <li><a href="#UI">User Interface</a></li>
     <li><a href="#Setup">Installation & Setup</a></li>
     <li><a href="#Supported-Sites">Supported Sites</a></li>
@@ -43,6 +44,10 @@ The architecture is organized into four layers (see Figure 1):
 </b></p>
 
 I use Groq's free tier for the AI layer. It allows up to 14,400 requests per day at no cost, which is more than enough for development, testing, and typical user traffic. This makes the system inexpensive to run while still providing fast inference through Groq's Llama 3.3 70B model.
+
+---
+
+<h3 id="Prerequisites">Prerequisites</h3>
 
 ---
 
