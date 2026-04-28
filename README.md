@@ -155,6 +155,10 @@ The project is organized into two main components:
 Below is the full directory tree:
 
 ```text
+├── figures
+│   ├── UI.jpg
+    ├── UI.pptx
+    └── architecture.jpg
 ├── job-match-extension-hosted
 │   ├── icons
     |   ├── icon128.png
