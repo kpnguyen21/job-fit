@@ -1,4 +1,4 @@
-# AI Job Match Chrome Extension
+# JobMatch AI Chrome Extension
 
 Develop a Chrome extension that matches skills with job descriptions and automatically tailors resume.
 
