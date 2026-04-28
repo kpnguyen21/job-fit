@@ -8,6 +8,7 @@ Develop a Chrome extension that matches skills with job descriptions and automat
     <li><a href="#Introduction">Introduction</a></li>
     <li><a href="#Architecture">Architecture Overview</a></li>
     <li><a href="#Prerequisites">Prerequisites</a></li>
+    <li><a href="#Quick-Start">Quick Start</a></li>
     <li><a href="#UI">User Interface</a></li>
     <li><a href="#Setup">Installation & Setup</a></li>
     <li><a href="#Supported-Sites">Supported Sites</a></li>
@@ -60,6 +61,19 @@ Choose this option if you want full control over the backend, want to customize 
 - Node.js — install via [nvm](https://github.com/nvm-sh/nvm) or [Volta](https://volta.sh/);
   see [Wrangler's system requirements](https://developers.cloudflare.com/workers/wrangler/install-and-update/) for the minimum supported version
 - Free Cloudflare account → [cloudflare.com](https://www.cloudflare.com)
+
+---
+
+<h3 id="Quick-Start">Quick Start</h3>
+
+#### Option A: use the hosted backend (no accounts needed)
+1. Load the extension from `job-match-extension-hosted/`
+2. No API key needed — uses the shared worker
+
+#### Option B: self-host your own backend
+1. Deploy `jobmatch-cloudflare/` to Cloudflare Workers
+2. Update `BACKEND_URL` in `src/background.js`
+3. Load the extension
 
 ---
 
