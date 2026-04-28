@@ -7,10 +7,12 @@ Develop a Chrome extension that matches skills with job descriptions and automat
 <ul>
     <li><a href="#Introduction">Introduction</a></li>
     <li><a href="#Architecture">Architecture Overview</a></li>
-    <li><a href="#Prerequisites">Prerequisites</a></li>
-    <li><a href="#Quick-Start">Quick Start</a></li>
-    <li><a href="#UI">User Interface</a></li>
+    <li><a href="#UI">User Interface Overview</a></li>
     <li><a href="#Setup">Installation & Setup</a></li>
+        <ul>
+            <li><a href="#Option-A">Option A: use the hosted backend (no accounts needed)</a></li>
+            <li><a href="#Option-B">Option B: self-host your own backend</a></li>
+        </ul> 
     <li><a href="#Supported-Sites">Supported Sites</a></li>
     <li><a href="#Code-Description">Code Description</a></li>
 </ul>
@@ -48,43 +50,22 @@ I use Groq's free tier for the AI layer. It allows up to 14,400 requests per day
 
 ---
 
-<h3 id="Prerequisites">Prerequisites</h3>
+<h3 id="UI">User Interface Overview</h3>
 
-#### Option A: use the hosted backend (no accounts needed)
-This is the simplest way to get started. Everything runs through the pre‑configured Cloudflare Worker, so you don't need to create any accounts, manage API keys, or deploy anything yourself. Just load the Chrome extension and start using it.
-- Chrome v114+
-
-#### Option B: self-host your own backend
-Choose this option if you want full control over the backend, want to customize rate limits, or prefer to use your own Groq API key. You'll deploy your own Cloudflare Worker and connect it to Groq's API.
-- Chrome v114+
-- Free Groq account → [console.groq.com](https://console.groq.com)
-- Node.js — install via [nvm](https://github.com/nvm-sh/nvm) or [Volta](https://volta.sh/);
-  see [Wrangler's system requirements](https://developers.cloudflare.com/workers/wrangler/install-and-update/) for the minimum supported version
-- Free Cloudflare account → [cloudflare.com](https://www.cloudflare.com)
-
----
-
-<h3 id="Quick-Start">Quick Start</h3>
-
-#### Option A: use the hosted backend (no accounts needed)
-1. Load the extension from `job-match-extension-hosted/`
-2. No API key needed — uses the shared worker
-
-#### Option B: self-host your own backend
-1. Deploy `jobmatch-cloudflare/` to Cloudflare Workers
-2. Update `BACKEND_URL` in `src/background.js`
-3. Load the extension
-
----
-
-<h3 id="UI">User Interface</h3>
+The User Interface includes three tabs (see Figure 2):
+- `Match`: Paste your resume (or **Upload TXT**) along with the job description, then click **Analyze Match** to generate the score and skill breakdown. On supported job boards, you can use **← Scrape Page** to automatically extract the job description without copying anything manually. Use **Save Resume** to store your `.txt` resume locally so you don't have to re‑paste it in future sessions.
+- `ATS Writer`:  Choose a resume section to rewrite and select a tone, then click **Generate**. The AI creates an ATS‑optimized version of that section using your saved resume and the current job description. This helps you quickly tailor key parts of your resume without rewriting everything manually.
+    - **Sections:** Professional Summary, Work Experience Bullets, Skills Section, Cover Letter Opening  
+    - **Tones:** Professional, Concise/Direct, Executive/Senior, Startup/Growth
+- `History`: Each analysis is saved locally with its match score, date, and a short snippet of the job description. This lets you revisit previous results and compare how different roles stack up over time.
 
 <p align="center">
-  <img src="/figures/match.jpg" width="900" />
+  <img src="/figures/UI.jpg" width="900" />
 </p>
-<p align="center"><b>Figure 2. Match.
+<p align="center"><b>Figure 2. The UI includes three tabs: Match (left) for analyzing resumes against job descriptions, ATS Writer (middle) for generating ATS‑optimized sections, and History (right) for viewing past analyses.
 </b></p>
 
+<!--
 <p align="center">
   <img src="/figures/ATS_all.jpg" width="900" />
 </p>
@@ -96,11 +77,56 @@ Choose this option if you want full control over the backend, want to customize 
 </p>
 <p align="center"><b>Figure 4. History.
 </b></p>
+-->
 
 ---
 
 <h3 id="Setup">Installation & Setup</h3>
 
+<h4 id="Option-A">Option A: use the hosted backend (no accounts needed)</h4>
+
+This is the simplest way to get started. Everything runs through the pre‑configured Cloudflare Worker, so you don't need to create any accounts, manage API keys, or deploy anything yourself. Just load the Chrome extension and start using it.
+
+****Prerequisites****
+- Chrome v114+
+
+****Steps****
+1. Clone or download this repo
+2. Open Chrome and go to `chrome://extensions/`
+3. Enable **Developer mode** (top right toggle)
+4. Click **Load unpacked** and select the `job-match-extension-hosted/` folder
+5. Open any supported job board and click the extension icon to open the side panel
+
+<h4 id="Option-B">Option B: self-host your own backend</h4>
+
+Choose this option if you want full control over the backend, want to customize rate limits, or prefer to use your own Groq API key. You'll deploy your own Cloudflare Worker and connect it to Groq's API.
+
+****Prerequisites****
+- Chrome v114+
+- Free Groq account → [console.groq.com](https://console.groq.com)
+- Node.js — install via [nvm](https://github.com/nvm-sh/nvm) or [Volta](https://volta.sh/);
+  see [Wrangler's system requirements](https://developers.cloudflare.com/workers/wrangler/install-and-update/) for the minimum supported version
+- Free Cloudflare account → [cloudflare.com](https://www.cloudflare.com)
+
+****Steps****
+1. Clone or download this repo
+2. Deploy the Cloudflare Worker:
+```bash
+   cd jobmatch-cloudflare
+   npm install
+   npx wrangler secret put GROQ_API_KEY   # paste your Groq key when prompted
+   npx wrangler deploy
+```
+3. Copy the deployed Worker URL from the output (e.g. `https://jobmatch-ai.your-name.workers.dev`)
+4. Open `job-match-extension-hosted/src/background.js` and update line 5:
+```js
+   const BACKEND_URL = "https://jobmatch-ai.your-name.workers.dev";
+```
+5. Load the extension in Chrome — go to `chrome://extensions/`, enable **Developer mode**, click **Load unpacked**, and select the `job-match-extension-hosted/` folder
+6. Open any supported job board and click the extension icon to open the side panel
+
+
+<!-- 
 Follow these steps to install and run the extension in Chrome:
 
 - Download/clone the repo
@@ -109,6 +135,7 @@ Follow these steps to install and run the extension in Chrome:
 - Click **Load unpacked** -> Select the `job-match-extension-hosted` folder
 - Navigate to a job posting on Indeed or LinkedIn
 - Click the extension icon and start using it.
+-->
 
 ---
 
