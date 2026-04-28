@@ -14,6 +14,7 @@ Develop a Chrome extension that matches skills with job descriptions and automat
             <li><a href="#Option-B">Option B: self-host your own backend</a></li>
         </ul> 
     <li><a href="#Supported-Sites">Supported Sites</a></li>
+    <li><a href="#Conclusion">Conclusion</a></li>
     <li><a href="#Code-Description">Code Description</a></li>
 </ul>
 
@@ -143,6 +144,18 @@ Follow these steps to install and run the extension in Chrome:
 <h3 id="Supported-Sites">Supported Sites</h3>
 
 The extension supports job postings from `Indeed`, `Workday`, `Greenhouse`, `Lever`, `iCIMS`, `SmartRecruiters`, `Jobvite`, `Ashby`, `Google Careers`, and `Amazon Jobs`. It also works with any other website by manually pasting the job description.
+
+---
+
+<h3 id="Conclusion">Conclusion</h3>
+
+JobMatch AI closes a critical gap in today's job-search ecosystem by bringing instant skill matching and ATS-optimized resume rewriting to platforms that lack these capabilities. The project demonstrates the power of combining a Chrome extension, a serverless backend, and Groq-accelerated LLMs to deliver real-time insights at minimal cost. With its modular, four-layer architecture, the system is well-positioned for future growth and enhancement.
+
+Several directions could meaningfully extend the project:
+
+- Upgrading the AI layer — switching to a more capable paid model such as OpenAI's GPT-4o or Google's Gemini 1.5 Pro would yield higher match accuracy and noticeably better ATS writing quality.
+- Migrating to a full backend — moving from Cloudflare Workers to a dedicated server (e.g., FastAPI on AWS or GCP) would unlock persistent user accounts, server-side history, detailed logging, and greater control over rate limiting and customization.
+- Publishing to the Chrome Web Store — currently, users must load the extension manually in developer mode, which is a significant friction barrier for non-technical users. A published listing would make the extension accessible to a much broader audience with a single click.
 
 ---
 
