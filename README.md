@@ -125,6 +125,7 @@ Choose this option if you want full control over the backend, want to customize 
 5. Load the extension in Chrome — go to `chrome://extensions/`, enable **Developer mode**, click **Load unpacked**, and select the `job-match-extension-hosted/` folder
 6. Open any supported job board and click the extension icon to open the side panel
 
+If you need help creating a Groq account, refer to the guide in `job-match-extension-hosted` [README](https://github.com/kpnguyen21/job-fit/blob/main/job-match-extension-hosted/README.md). 
 
 <!-- 
 Follow these steps to install and run the extension in Chrome:
