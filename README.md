@@ -163,10 +163,10 @@ Below is the full directory tree:
 │   ├── icons
     |   ├── icon128.png
         ├── icon16.png
-        ├── icon48.png
+        └── icon48.png
     ├── src
     |   ├── background.js
-        ├── content.js
+        └── content.js
     ├── manifest.json
     ├── sidepanel.css
     ├── sidepanel.html
