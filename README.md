@@ -33,13 +33,13 @@ This project aims to solve that problem by developing a Chrome extension that br
 <h3 id="Architecture">Architecture Overview</h3>
 
 The architecture is organized into four layers (see Figure 1):
-- User layer: The job boards where the user is browsing. These are the entry points into the system.
-- Extension layer: Three JavaScript modules work together inside the Chrome extension.
+- **User layer:** The job boards where the user is browsing. These are the entry points into the system.
+- **Extension layer:** Three JavaScript modules work together inside the Chrome extension.
     - `content.js` runs directly on the job posting page and extracts the job description.
     - `sidepanel.js` provides the user interface, allowing the user to paste their resume and view the analysis results.
     - `background.js` acts as the communication hub, receiving messages from the side panel and forwarding requests to the backend.
-- Backend layer: A Cloudflare Worker (`worker.js`) handles all network‑side responsibilities. It manages CORS, validates request origins, and enforces rate limits using a KV store (30 requests per hour per IP). The Worker also proxies requests to Groq so the API key remains securely on the server.
-- AI layer: Groq's Llama 3.3 70B model performs the core analysis. It processes the job description and resume to generate the match score, identify matched and missing skills, and produce ATS‑optimized resume sections.
+- **Backend layer:** A Cloudflare Worker (`worker.js`) handles all network‑side responsibilities. It manages CORS, validates request origins, and enforces rate limits using a KV store (30 requests per hour per IP). The Worker also proxies requests to Groq so the API key remains securely on the server.
+- **AI layer:** Groq's Llama 3.3 70B model performs the core analysis. It processes the job description and resume to generate the match score, identify matched and missing skills, and produce ATS‑optimized resume sections.
 
 <p align="center">
   <img src="/figures/architecture.jpg" width="900" />
